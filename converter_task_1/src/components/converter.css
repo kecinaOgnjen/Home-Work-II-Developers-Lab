@@ -26,11 +26,11 @@ button {
     background-color: rgb(214, 167, 39);
 }
 
-h3 {
+h4 {
     background-color: rgba(158, 149, 149, 0.5);
     border-radius: 1rem;
     padding: 1rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 @media only screen and (max-width:768px) {

@@ -14,10 +14,10 @@ class Converter extends Component {
 
     componentDidMount() {
         axios
-            .get("http://data.fixer.io/api/latest?access_key=77de4343754c4aad423c5480672e71cf")
+            .get("https://free.currconv.com/api/v7/currencies?apiKey=d5937665045783289b6d")
             .then(response => {
                 const currency = []
-                for (const key in response.data.rates) {
+                for (const key in response.data.results) {
                     if (key === "EUR" || key === "USD" || key === "RSD" || key === "GBP") {
                         currency.push(key)
                     } else {
@@ -34,11 +34,10 @@ class Converter extends Component {
     convertHandler = () => {
         if (this.state.fromCurrency !== this.state.toCurrency) {
             axios
-                .get(`http://data.fixer.io/api/latest?access_key=77de4343754c4aad423c5480672e71cf&base=${this.state.fromCurrency}&symbols=${this.state.toCurrency}`)
+                .get(`https://free.currconv.com/api/v7/convert?apiKey=d5937665045783289b6d&q=${this.state.fromCurrency}_${this.state.toCurrency}`)
                 .then(response => {
-                    const result = this.state.amount * (response.data.rates[this.state.toCurrency]);
-                    this.setState({ result: result.toFixed(3) })
-                    console.log(response.data);
+                    const result = `${this.state.fromCurrency}_${this.state.toCurrency}`;
+                    this.setState({ result: response.data.results[result].val.toFixed(3) })
                 })
                 .catch(err => {
                     console.log(err);
@@ -92,7 +91,7 @@ class Converter extends Component {
             </div> 
             {
                 this.state.result &&
-                <h3> { this.state.result } </h3>
+                <h4> { this.state.result } </h4>
             } 
             </div>
         );
