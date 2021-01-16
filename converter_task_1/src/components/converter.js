@@ -38,7 +38,7 @@ class Converter extends Component {
             axios
                 .get(`https://free.currconv.com/api/v7/convert?apiKey=d5937665045783289b6d&q=${endPoint}`)
                 .then(({data : {results}}) => {
-                    let result = results[endPoint].val;
+                    let result = this.state.amount*results[endPoint].val;
                     result = result.toFixed(3);
                     this.setState({result});
                 })
