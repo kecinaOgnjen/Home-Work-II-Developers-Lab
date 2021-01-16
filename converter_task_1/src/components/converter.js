@@ -32,12 +32,15 @@ class Converter extends Component {
     }
 
     convertHandler = () => {
-        if (this.state.fromCurrency !== this.state.toCurrency) {
+        const {fromCurrency, toCurrency} = this.state;
+        if (fromCurrency !== toCurrency) {
+            const endPoint = `${fromCurrency}_${toCurrency}`;  
             axios
-                .get(`https://free.currconv.com/api/v7/convert?apiKey=d5937665045783289b6d&q=${this.state.fromCurrency}_${this.state.toCurrency}`)
-                .then(response => {
-                    const result = `${this.state.fromCurrency}_${this.state.toCurrency}`;
-                    this.setState({ result: response.data.results[result].val.toFixed(3) })
+                .get(`https://free.currconv.com/api/v7/convert?apiKey=d5937665045783289b6d&q=${endPoint}`)
+                .then(({data : {results}}) => {
+                    let result = results[endPoint].val;
+                    result = result.toFixed(3);
+                    this.setState({result});
                 })
                 .catch(err => {
                     console.log(err);
