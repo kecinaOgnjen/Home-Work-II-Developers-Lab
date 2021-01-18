@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './game.css';
 
-class Score extends Component {
+class Game extends Component {
     state = {
         result: null,
         f
@@ -13,7 +13,7 @@ class Score extends Component {
 
     render() {
         return (
-            <div class="score">
+            <div class="cards">
                 
             </div>
 
@@ -22,4 +22,4 @@ class Score extends Component {
 }
 
 
-export default Score;
+export default Game;
